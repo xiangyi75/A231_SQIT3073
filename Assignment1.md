@@ -6,7 +6,7 @@ import os
 os.system('cls')
 
 # All function           
-def cal_monthly_instalment(principal, annual_interest, loan_term):
+def cal_monthly_installment(principal, annual_interest, loan_term):
     monthly_interest = (annual_interest/100)/12
     monthly_loan_term = loan_term*12
     monthly_installment = (principal + monthly_interest)/monthly_loan_term
@@ -24,7 +24,7 @@ cal = []
 
 # Output of 1. Calculate Loan
 def all_info(principal, annual_interest, loan_term, monthly_fin_com, monthly_income):
-    monthly_installment = cal_monthly_instalment(principal, annual_interest, loan_term)
+    monthly_installment = cal_monthly_installment(principal, annual_interest, loan_term)
     total_payable = cal_total_payable(monthly_installment, loan_term)
     DSR = cal_DSR(monthly_installment, monthly_fin_com, monthly_income)
 
