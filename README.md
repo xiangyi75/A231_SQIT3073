@@ -34,7 +34,6 @@ def all_info(principal, annual_interest, loan_term, monthly_fin_com, monthly_inc
     print(f"Loan Term: {loan_term} years")
     print(f"Monthly Income: RM {monthly_income}")
     print(f"Other Monthly Commitments: RM {monthly_fin_com}")
-# output in 2dp
     print(f"Monthly Instalment: RM {monthly_installment:.2f}")
     print(f"Total Payment: RM {total_payable:.2f}")
     print(f"DSR: {DSR:.2f}%")
