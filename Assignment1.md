@@ -24,7 +24,7 @@ def cal_DSR(monthly_installment, monthly_fin_com, monthly_income):
 
 cal = []
 
-# Show Loan Result
+# Show loan results
 def all_info(principal, annual_interest, loan_term, monthly_fin_com, monthly_income):
     monthly_installment = cal_monthly_installment(principal, annual_interest, loan_term)
     total_payable = cal_total_payable(monthly_installment, loan_term)
@@ -42,10 +42,9 @@ def all_info(principal, annual_interest, loan_term, monthly_fin_com, monthly_inc
 
     if DSR<= 70:
         print("\nYou are eligible for the loan")
-        print("-------------------------------------------------------------------")
     else:
         print("\nYou are not eligible for the loan due to DSR smaller than 70%")
-        print("-------------------------------------------------------------------")
+    print("-------------------------------------------------------------------")
     
     # append into list so that we can show in history later
     cal.append(
@@ -63,16 +62,41 @@ def all_info(principal, annual_interest, loan_term, monthly_fin_com, monthly_inc
 
 # Show History
 def all_cal():
-    print("\nAll History:")
-    number = 1
-    for cal1 in cal:
-        print(f"\nHistory {number}:")
-        for key, value in cal1.items():
-            print(f"{key}: {value}")
-        number += 1
+    if not cal:
+        print("\nNo history.")
+    else:
+        print("\nAll History:")
+        number = 1
+        for cal1 in cal:
+            print(f"\nHistory {number}:")
+            for key, value in cal1.items():
+                print(f"{key}: {value}")
+            number += 1
     print("-------------------------------------------------------------------")
 
-# Menu
+# Del previous calculation in list
+def del_cal():
+    global cal
+    if not cal:
+        print("\nNo history to delete.")
+    else:
+        dlt = input("Sure to delete the previous calculation? (1 = yes, 0 = no): ")
+        if dlt == "1":
+            cal_tuple = tuple(cal)
+            if len(cal_tuple) > 0:
+                cal_tuple = cal_tuple[:-1]
+                cal = list(cal_tuple)
+                print("\nDeleted the last history.")
+            else:
+                menu()
+        elif dlt == "0":
+            menu()
+        else:
+            print("Invalid input.")
+            menu()
+    print("-------------------------------------------------------------------")
+
+#System
 def menu():
     loop = 0
     loop1 = 1
@@ -80,9 +104,10 @@ def menu():
         print("\nMENU:")
         print("1. Calculate Loan")
         print("2. History")
-        print("3. Exit")
+        print("3. Delete previous calculation")
+        print("4. Exit")
 
-        select = input("Enter (1/2/3): ")
+        select = input("Enter (1/2/3/4): ")
 
         if select == "1":
             try:
@@ -99,17 +124,19 @@ def menu():
         elif select == "2":
             all_cal()
         elif select == "3":
-            exit = str(input("\nAll history will be clear after exit the program. \nYes, exit. = 1 \nNo = 0 \nEnter (0/1):  "))
-            if "1" in  exit:
+            del_cal()
+        elif select == "4":
+            exit = input("\nSure to exit? All history will be delete. (1 = yes, 0 = no): ")
+            if exit == "1":
                 print("Bye.")
                 sys.exit()
-            elif "0" in exit: 
+            elif exit == "0": 
                 menu()
             else:
-                print("Invalid input. Please enter again.")
+                print("Invalid input.")
                 menu()
         else:
-            print("Invalid. Please enter 1, 2 or 3.")
+            print("Invalid. Please enter 1, 2, 3 or 4.")
     loop += 1
 
 menu()
