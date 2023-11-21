@@ -165,4 +165,4 @@ while welcome == "1":
         a += 1
 
 else:
-    "Invalid input."
+    print("Invalid input.")
